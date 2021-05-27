@@ -38,7 +38,7 @@ module.exports = function(){
 	
 	
 	function getHunter(res, db, context, hid, complete){
-		var sql = "SELECT fName FROM Hunters WHERE hunterID = ?;";
+		var sql = "SELECT hunterID, fName FROM Hunters WHERE hunterID = ?;";
 		var inserts = [hid];
 		db.pool.query(sql, inserts, function(error, results, fields){
 			if (error){
@@ -51,7 +51,7 @@ module.exports = function(){
 	}
 	
 	function getSupply(res, db, context, sid, complete){
-		var sql = "SELECT sName FROM Supplies WHERE supplyID = ?;";
+		var sql = "SELECT supplyID, sName FROM Supplies WHERE supplyID = ?;";
 		var inserts = [sid];
 		db.pool.query(sql, inserts, function(error, results, fields){
 			if (error){
