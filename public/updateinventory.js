@@ -4,7 +4,7 @@ function updateInventory(hid, sid){
 		type: "PUT",
 		data: $("#updateInventory").serialize(),
 		success: function(result){
-			window.location.replace(".../");
+			window.location.replace("/inventory");
 		}
 	})
 };
