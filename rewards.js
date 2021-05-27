@@ -17,6 +17,7 @@ module.exports = function(){
 	router.get('/', function(req, res){
 		var callbackCount = 0;
 		var context = {};
+		context.jsscripts = ["deletereward.js"];
 		var db = req.app.get('mysql');
 		
 		getRewards(res, db, context, complete);
@@ -34,6 +35,12 @@ module.exports = function(){
     router.post('/', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "INSERT INTO Rewards (rName, type, rarity) VALUES (?,?,?)";
+		if(req.body.rName == "")
+			req.body.rName = null;
+		if(req.body.type == "")
+			req.body.type = null;
+		if(req.body.rarity == "")
+			req.body.rarity = null;
         var inserts = [req.body.rName, req.body.type, req.body.rarity];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
@@ -45,5 +52,21 @@ module.exports = function(){
             }
         });
     });
+	
+	router.delete('/:id', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "DELETE FROM Rewards WHERE rewardID=?";
+        var inserts = [req.params.id];
+        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+            if(error){
+                console.log(JSON.stringify(error))
+                res.write(JSON.stringify(error));
+                res.end();
+            }else{
+                res.status(202).end();
+            }
+        });
+    });
+	
 	return router;
 }();
