@@ -48,6 +48,14 @@ module.exports = function(){
     router.post('/', function(req, res){
         var db = req.app.get('mysql');
         var sql = "INSERT INTO Hunters (huntID, fName, lName, hunterRank, weapon) VALUES (?,?,?,?,?)";
+		if(req.body.fname == "")
+			req.body.fname = null;
+		if(req.body.lname == "")
+			req.body.lname = null;
+		if(req.body.hunterRank == "")
+			req.body.hunterRank = null;
+		if(req.body.weapon == "")
+			req.body.weapon = null;
         var inserts = [req.body.huntID, req.body.fname, req.body.lname, req.body.hunterRank, req.body.weapon];
         sql = db.pool.query(sql, inserts, function(error, results, fields){
             if (error){

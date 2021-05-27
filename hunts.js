@@ -48,6 +48,16 @@ module.exports = function(){
 	router.post('/', function(req, res){
 		var db = req.app.get('mysql');
 		var sql = "INSERT INTO Hunts (target, area, rank, outcome, rewardID) VALUES (?,?,?,?,?);";
+		if(req.body.target == "")
+			req.body.target = null;
+		if(req.body.area == "")
+			req.body.area = null;
+		if(req.body.rank == "")
+			req.body.rank = null;
+		if(req.body.outcome == "")
+			req.body.outcome = null;
+		if(req.body.reward == "")
+			req.body.reward = null;
 		var inserts = [req.body.target, req.body.area, req.body.rank, req.body.outcome, req.body.reward];
 		sql = db.pool.query(sql, inserts, function(error, results, fields){
 			if (error){

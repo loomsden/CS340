@@ -34,6 +34,12 @@ module.exports = function(){
     router.post('/', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "INSERT INTO Supplies (sName, type, effect) VALUES (?,?,?)";
+		if(req.body.sName == "")
+			req.body.sName = null;
+		if(req.body.type == "")
+			req.body.type = null;
+		if(req.body.effect == "")
+			req.body.effect = null;
         var inserts = [req.body.sName, req.body.type, req.body.effect];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
