@@ -1,0 +1,85 @@
+<section>
+  <div class='row justify-content-between'>
+    <div class='col-lg-6'>
+      <h3 class="">Rewards Table</h3>
+    </div>
+    <div class='col-lg-4 px-2'>
+      <div class='form-inline'>
+        <input class="form-control" type="search" placeholder="Search criteria" aria-label="Search">
+        <button class="btn btn-primary m-2" type="submit" style = "float: right;" >Search</button>
+      </div>
+    </div>
+  </div>
+</section>
+  
+<section class="m-3">
+  <form class="p-4" action="/rewards" method="POST">
+    <legend class="form-legend">Enter data to add a row</legend>
+    <div class="row">
+      <div class="column col-sm-2">
+        <div class="form-floating">
+          <input type="text" class="form-control" name="rName">
+          <label for="floatingInput">Name</label>
+        </div>
+      </div>
+      <div class="column col-sm-2">
+        <div class="form-floating">
+          <select class="form-control" id="FormControlSelect1" name="type">
+			<option></option>
+            <option>Currency</option>
+            <option>Tickets and Coins</option>
+            <option>Monster Material</option>
+            <option>Valuable</option>
+            <option>Other</option>
+          </select>
+          <label for="floatingInput">Type</label>
+        </div>
+      </div>
+      <div class="column col-sm-2">
+        <div class="form-floating">
+          <select class="form-control" id="FormControlSelect1" name="rarity">
+            <option></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+          </select>
+          <label for="floatingInput">Rarity</label>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+      </div>
+    </div>
+  </form>
+</section>
+  
+<section class="table-padding">
+  <table class="table table-hover text-center">
+    <thead>
+      <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Type</th>
+      <th scope="col">Rarity</th>
+      <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+	{{#each rewards}}
+      <tr>
+            <th scope="row">{{rewardID}}</th>
+            <td>{{rName}}</td>
+            <td>{{type}}</td>
+            <td>{{rarity}}</td>
+			<td>
+				<button type="button" class="btn btn-danger btn-sm" onclick="deleteReward({{rewardID}})">Delete</button>
+			</td>
+      </tr>
+	{{/each}}
+    </tbody>
+  </table>
+<section>

@@ -1,0 +1,71 @@
+          <section>
+    <h3 class="pageTitle">Pets Table</h3>
+  </section>
+  
+  <section class="m-3">
+    <form class="p-4"  action="/pets" method="POST">
+      <legend class="form-legend">Enter data to add or edit row</legend>
+      <div class="row">
+      <div class="column col-sm-2">
+          <div class="form-floating">
+            <select class="form-control" id="FormControlSelect1" name="hunterID">
+            <option></option>
+	    {{#each hunters}}
+            <option value="{{hunterID}}">{{hunterID}} - {{fName}}</option>
+            {{/each}}
+          </select>
+          <label for="floatingInput">hunterID</label>
+          </div>
+      </div>
+      <div class="column col-sm-2">
+        <div class="form-floating">
+          <input type="text" class="form-control" name="pName">
+          <label for="floatingInput">Name</label>
+        </div>
+      </div>
+      <div class="column col-sm-2">
+        <div class="form-floating">
+          <select class="form-control" id="FormControlSelect1" name="species">
+            <option></option>
+            <option>Palamute</option>
+            <option>Palico</option>
+          </select>
+          <label for="floatingInput">Species</label>
+        </div>
+      </div>
+      <div class="column col-sm-2">
+        <div class="form-floating">
+          <input type="text" class="form-control" name="color">
+          <label for="floatingInput">Color (optional)</label>
+        </div>
+      </div>  
+      <div class="col-sm-2">
+        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+      </div> 
+  </form>
+</section>
+  
+<section class="table-padding">
+  <table class="table table-hover text-center">
+    <thead>
+      <tr>
+      <th scope="col">ID</th>
+      <th scope="col">hunterID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Species</th>
+      <th scope="col">Color</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each pets}}
+        <tr>
+            <th scope="row">{{petID}}</th>
+			<th scope="row">{{hunterID}}</th>
+            <td>{{pName}}</td>
+            <td>{{species}}</td>
+            <td>{{color_nn}}</td>
+        </tr>
+    {{/each}}
+    </tbody>
+  </table>
+</section>

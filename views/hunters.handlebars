@@ -1,0 +1,82 @@
+<section>
+  <h3 class="pageTitle">Hunters Table</h3>
+</section>
+  
+<section class="m-3">
+  <form class="p-4"  action="/hunters" method="POST">
+    <legend class="form-legend">Enter data to add a row</legend>
+    <div class="row">
+      <div class="column col-sm-2">
+        <div class="form-floating">
+          <select class="form-control" id="FormControlSelect1" name="huntID">
+            <option></option>
+            {{#each hunts}}
+	    <option value="{{huntID}}">{{huntID}} - {{target}}</option>
+	    {{/each}}
+          </select>
+          <label for="floatingInput">huntID</label>
+        </div>
+      </div>
+      <div class="column col-sm-2">
+        <div class="form-floating">
+          <input type="text" class="form-control" name="fname">
+          <label for="floatingInput">fName</label>
+        </div>
+      </div>
+      <div class="column col-sm-2">
+        <div class="form-floating">
+          <input type="text" class="form-control" name="lname">
+          <label for="floatingInput">lName (optional)</label>
+        </div>
+      </div>
+      <div class="column col-sm-2">
+        <div class="form-floating">
+          <input type="number" class="form-control" name="hunterRank">
+          <label for="floatingInput">Hunter Rank</label>
+        </div>
+      </div>
+      <div class="column col-sm-2">
+        <div class="form-floating">
+          <select class="form-control" id="FormControlSelect1" name="weapon">
+            <option></option>
+            <option>Hammer</option>
+            <option>Long Sword</option>
+            <option>Lance</option>
+            <option>Hunting Horn</option>
+          </select>
+          <label for="floatingInput">Weapon</label>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <button type="submit" class="btn btn-primary btn-sm" value="Submit">Submit</button>
+      </div> 
+    </div>
+  </form>
+</section>
+  
+<section class="table-padding">
+  <table class="table table-hover text-center">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">huntID</th>
+        <th scope="col">fName</th>
+        <th scope="col">lName</th>
+        <th scope="col">Rank</th>
+        <th scope="col">Weapon</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each hunters}}
+        <tr>
+            <th scope="row">{{hunterID}}</th>
+			<th scope="row">{{huntID}}</th>
+            <td>{{fName}}</td>
+			<td>{{lName_nn}}</td>
+            <td>{{hunterRank}}</td>
+            <td>{{weapon}}</td>
+        </tr>
+    {{/each}}
+    </tbody>
+  </table>
+</section>

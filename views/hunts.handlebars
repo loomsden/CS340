@@ -1,0 +1,90 @@
+<section>
+  <h3 class="pageTitle">Hunts Table</h3>
+</section>
+  
+<section class="m-3">
+  <form class="p-4" id="addHunt" action="/hunts" method="POST">
+    <legend class="form-legend">Enter data to add a row</legend>
+    <div class="row">
+      <div class="column col-sm-2">
+        <div class="form-floating">
+          <input type="text" class="form-control" name="target">
+          <label for="floatingInput">Target</label>
+        </div>
+      </div>
+      <div class="column col-sm-2">
+        <div class="form-floating">
+          <select class="form-control" id="FormControlSelect1" name="rank">
+            <option></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+          </select>
+          <label for="floatingInput">Rank</label>
+        </div>
+      </div> 
+      <div class="column col-sm-2">
+        <div class="form-floating">
+          <input type="text" class="form-control" name="area">
+          <label for="floatingInput">Area</label>
+        </div>
+      </div>
+      <div class="column col-sm-2">
+        <div class="form-floating">
+          <select class="form-control" id="FormControlSelect1" name="outcome">
+            <option></option>
+            <option>Killed</option>
+            <option>Captured</option>
+            <option>Failed</option>
+          </select>
+          <label for="floatingInput">Outcome</label>
+        </div>
+      </div> 
+      <div class="column col-sm-2">
+        <div class="form-floating">
+          <select class="form-control" id="FormControlSelect1" name="reward">
+            <option value=null></option>
+	    {{#each rewards}}
+            <option value="{{rewardID}}">{{rewardID}} - {{rName}}</option>
+            {{/each}}
+          </select>
+          <label for="floatingInput">Reward (blank if failed)</label>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <button type="submit" class="btn btn-primary btn-sm" value="Submit">Submit</button>
+      </div> 
+    </div>
+  </form>
+</section>
+  
+<section class="table-padding">
+  <table class="table table-hover text-center">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Target</th>
+        <th scope="col">Rank</th>
+        <th scope="col">Area</th>
+        <th scope="col">Outcome</th>
+        <th scope="col">Reward</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each hunts}}
+        <tr>
+            <th scope="row">{{huntID}}</th>
+            <td>{{target}}</td>
+	    <td>{{rank}}</td>
+            <td>{{area}}</td>
+            <td>{{outcome}}</td>
+	    <th scope="row">{{rewardID_nn}}</th>
+        </tr>
+    {{/each}}
+    </tbody>
+  </table>
+</section>

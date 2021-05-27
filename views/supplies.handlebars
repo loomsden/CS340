@@ -1,0 +1,81 @@
+<section>
+  <div class='row justify-content-between'>
+    <div class='col-lg-6'>
+      <h3 class="">Supplies Table</h3>
+    </div>
+    <div class='col-lg-4 px-2'>
+      <div class='form-inline'>
+        <input class="form-control" type="search" placeholder="Search criteria" aria-label="Search">
+        <button class="btn btn-primary m-2" type="submit" style = "float: right;">Search</button>
+      </div>
+    </div>
+  </div>
+</section>
+  
+<section class="m-3">
+  <form class="p-4" action="/supplies" method="POST">
+    <legend class="form-legend">Enter data to add a row</legend>
+    <div class="row">
+      <div class="column col-sm-2">
+        <div class="form-floating">
+          <input type="text" class="form-control" name="sName">
+          <label for="floatingInput">Name</label>
+        </div>
+      </div>
+      <div class="column col-sm-2">
+        <div class="form-floating">
+          <select class="form-control" id="FormControlSelect1" name="type">
+            <option></option>
+            <option>Consumable</option>
+            <option>Trap</option>
+            <option>Explosive</option>
+            <option>Throwable</option>
+            <option>Ammo</option>
+          </select>
+          <label for="floatingInput">Type</label>
+        </div>
+      </div>
+      <div class="column col-sm-2">
+        <div class="form-floating">
+          <select class="form-control" id="FormControlSelect1" name="effect">
+            <option></option>
+            <option>Health Regen</option>
+            <option>Stamina Regen</option>
+            <option>Health Recovery</option>
+            <option>Stamina Recovery</option>
+            <option>Attack Boost</option>
+            <option>Defense Boost</option>
+            <option>Cleanse</option>
+          </select>
+          <label for="floatingInput">Effect</label>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+      </div>
+    </div> 
+  </form>
+</section>
+    
+<section class="table-padding">
+  <table class="table table-hover text-center">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Type</th>
+        <th scope="col">Effect</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each supplies}}
+        <tr>
+            <th scope="row">{{supplyID}}</th>
+            <td>{{sName}}</td>
+            <td>{{type}}</td>
+            <td>{{effect_nn}}</td>
+        </tr>
+    {{/each}}
+    </tbody>
+  </table>
+</section>

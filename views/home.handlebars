@@ -1,0 +1,156 @@
+
+<section>
+  <h2 class="pageTitle">Overview</h2>
+</section>
+
+<section class="table-padding">
+	<h3>Hunts</h3>
+  <table class="table table-hover text-center">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+	<th scope="col">Target</th>
+        <th scope="col">Rank</th>
+        <th scope="col">Area</th>
+        <th scope="col">Outcome</th>
+  	<th scope="col">Reward</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each hunts}}
+        <tr>
+            <th scope="row">{{huntID}}</th>
+            <td>{{target}}</td>
+	    <td>{{rank}}</td>
+            <td>{{area}}</td>
+            <td>{{outcome}}</td>
+	    <th scope="row">{{rewardID_nn}}</th>
+        </tr>
+    {{/each}}
+    </tbody>
+  </table>
+</section>
+<br>
+<section class="table-padding">
+	<h3>Hunters</h3>
+  <table class="table table-hover text-center">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+  <th scope="col">huntID</th>
+        <th scope="col">first Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Rank</th>
+        <th scope="col">Weapon</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each hunters}}
+        <tr>
+            <th scope="row">{{hunterID}}</th>
+	    <th scope="row">{{huntID}}</th>
+            <td>{{fName}}</td>
+	    <td>{{lName_nn}}</td>
+            <td>{{hunterRank}}</td>
+            <td>{{weapon}}</td>
+        </tr>
+    {{/each}}
+    </tbody>
+  </table>
+</section>
+<br>
+<section class="table-padding">
+	<h3>Pets</h3>
+  <table class="table table-hover text-center">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+	  <th scope="col">hunterID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Species</th>
+        <th scope="col">Color</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each pets}}
+        <tr>
+            <th scope="row">{{petID}}</th>
+	    <th scope="row">{{hunterID}}</th>
+            <td>{{pName}}</td>
+            <td>{{species}}</td>
+            <td>{{color_nn}}</td>
+        </tr>
+    {{/each}}
+    </tbody>
+  </table>
+</section>
+<br>
+<section class="table-padding">
+	<h3>Inventory</h3>
+  <table class="table table-hover text-center">
+    <thead>
+      <tr>
+        <th scope="col">HunterID</th>
+        <th scope="col">SupplyID</th>
+        <th scope="col">Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each inventory}}
+        <tr>
+            <th scope="row">{{hunterID}}</th>
+            <th scope="row">{{supplyID}}</th>
+            <td>{{quantity}}</td>
+        </tr>
+    {{/each}}
+    </tbody>
+  </table>
+</section>
+<br>
+<section class="table-padding">
+	<h3>Supplies</h3>
+  <table class="table table-hover text-center">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Type</th>
+        <th scope="col">Effect</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each supplies}}
+        <tr>
+            <th scope="row">{{supplyID}}</th>
+            <td>{{sName}}</td>
+            <td>{{type}}</td>
+            <td>{{effect_nn}}</td>
+        </tr>
+    {{/each}}
+    </tbody>
+  </table>
+</section>
+<br>
+<section class="table-padding">
+	<h3>Rewards</h3>
+  <table class="table table-hover text-center">
+    <thead>
+      <tr>
+	    <th scope="col">ID</th>
+	    <th scope="col">Name</th>
+	    <th scope="col">Type</th>
+	    <th scope="col">Rarity</th>
+      </tr>
+    </thead>
+    <tbody>
+    {{#each rewards}}
+        <tr>
+            <th scope="row">{{rewardID}}</th>
+            <td>{{rName}}</td>
+            <td>{{type}}</td>
+            <td>{{rarity}}</td>
+        </tr>
+    {{/each}}
+    </tbody>
+  </table>
+</section>

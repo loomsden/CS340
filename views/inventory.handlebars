@@ -1,0 +1,68 @@
+<section>
+  <h3 class="pageTitle">Inventory Table (Hunters:Supplies)</h3>
+</section>
+  
+<section class="m-3">
+  <form class="p-4"  action="/inventory" method="POST">
+    <legend class="form-legend">Enter data to add a row</legend>
+    <div class="row">
+      <div class="column col-sm-2">
+        <div class="form-floating">
+          <select class="form-control" id="FormControlSelect1" name="hunterID">
+            <option></option>
+	    {{#each hunters}}
+            <option value="{{hunterID}}">{{hunterID}} - {{fName}}</option>
+            {{/each}}
+          </select>
+          <label for="floatingInput">hunterID</label>
+        </div>
+      </div>
+      <div class="column col-sm-2">
+        <div class="form-floating">
+          <select class="form-control" id="FormControlSelect1" name="supplyID">
+            <option></option>
+	    {{#each supplies}}
+            <option value="{{supplyID}}">{{supplyID}} - {{sName}}</option>
+            {{/each}}
+          </select>
+          <label for="floatingInput">supplyID</label>
+        </div>
+      </div>
+      <div class="column col-sm-2">
+        <div class="form-floating">
+          <input type="number" class="form-control" name="quantity">
+          <label for="floatingInput">Quantitiy</label>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+      </div>
+    </div> 
+  </form>
+</section>
+  
+<section class="table-padding">
+  <table class="table table-hover text-center">
+    <thead>
+      <tr>
+        <th scope="col">hunterID</th>
+        <th scope="col">supplyID</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Edit</th>
+      </tr>
+    </thead>
+    <tbody>
+		{{#each inventory}}
+        <tr>
+            <th scope="row">{{hunterID}}</th>
+            <th scope="row">{{supplyID}}</th>
+            <td>{{quantity}}</td>
+			<td>
+				<button type="button" class="btn btn-danger btn-sm">Delete</button>
+				<button type="button" class="btn btn-primary btn-sm">Update</button>
+			</td>
+        </tr>
+    {{/each}}
+    </tbody>
+  </table>
+</section>
