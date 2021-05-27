@@ -40,7 +40,7 @@ module.exports = function(){
 	function getHunter(res, db, context, hid, complete){
 		var sql = "SELECT fName FROM Hunters WHERE hunterID = ?;";
 		var inserts = [hid];
-		sql = db.pool.query(sql, inserts, function(error, results, fields){
+		db.pool.query(sql, inserts, function(error, results, fields){
 			if (error){
 				res.write(JSON.stringify(error));
 				res.end(); 
@@ -53,7 +53,7 @@ module.exports = function(){
 	function getSupply(res, db, context, sid, complete){
 		var sql = "SELECT sName FROM Supplies WHERE supplyID = ?;";
 		var inserts = [sid];
-		sql = db.pool.query(sql, inserts, function(error, results, fields){
+		db.pool.query(sql, inserts, function(error, results, fields){
 			if (error){
 				res.write(JSON.stringify(error));
 				res.end(); 
@@ -112,11 +112,12 @@ module.exports = function(){
 		var db = req.app.get('mysql');
 		
 		getInventory(res, db, context, complete);
-
+		getHunter(res, db, context, req.params.hid, complete);
+		getSupply(res, db, context, req.params.sid, complete);
 		
 		function complete(){
 			callbackCount++;
-			if (callbackCount >= 1)
+			if (callbackCount >= 3)
 			{
 				res.render('update-Inventory', context);
 				//res.send(JSON.stringify(context));
