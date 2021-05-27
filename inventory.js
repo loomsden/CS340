@@ -112,12 +112,11 @@ module.exports = function(){
 		var db = req.app.get('mysql');
 		
 		getInventory(res, db, context, complete);
-		getHunter(res, db, context, hid, complete);
-		getSupply(res, db, context, sid, complete);
+
 		
 		function complete(){
 			callbackCount++;
-			if (callbackCount >= 3)
+			if (callbackCount >= 1)
 			{
 				//res.render('update-Inventory', context);
 				res.send(JSON.stringify(context));
