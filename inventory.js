@@ -4,7 +4,7 @@ module.exports = function(){
 	
 	
 	function getInventory(res, db, context, complete){
-		db.pool.query("SELECT * FROM Inventory;", function(error, results, fields){
+		db.pool.query("SELECT i.hunterID, i.supplyID, i.quantity, h.fName, s.sName FROM Inventory i JOIN Hunters h ON i.hunterID=h.hunterID JOIN Supplies s ON i.supplyID=s.supplyID;", function(error, results, fields){
 			if (error){
 				res.write(JSON.stringify(error));
 				res.end(); 
