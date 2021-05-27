@@ -37,32 +37,18 @@ module.exports = function(){
 	}
 	
 	
-	function getHunter(res, db, context, hid, complete){
-		var sql = "SELECT hunterID, fName FROM Hunters WHERE hunterID = ?;";
-		var inserts = [hid];
+	function getItem(res, db, context, hid, sid, complete){
+		var sql = "SELECT i.hunterID, i.supplyID, i.quantity, h.fName, s.sName FROM Inventory i JOIN Hunters h ON i.hunterID=h.hunterID JOIN Supplies s ON i.supplyID=s.supplyID WHERE i.hunterID=? AND i.supplyID=?;";
+		var inserts = [hid, sid];
 		db.pool.query(sql, inserts, function(error, results, fields){
 			if (error){
 				res.write(JSON.stringify(error));
 				res.end(); 
 			}
-			context.hunter = results[0];
+			context.item = results[0];
 			complete();
 		});
 	}
-	
-	function getSupply(res, db, context, sid, complete){
-		var sql = "SELECT supplyID, sName FROM Supplies WHERE supplyID = ?;";
-		var inserts = [sid];
-		db.pool.query(sql, inserts, function(error, results, fields){
-			if (error){
-				res.write(JSON.stringify(error));
-				res.end(); 
-			}
-			context.supply = results[0];
-			complete();
-		});
-	}
-	
 	
 	
 	
@@ -112,12 +98,11 @@ module.exports = function(){
 		var db = req.app.get('mysql');
 		
 		getInventory(res, db, context, complete);
-		getHunter(res, db, context, req.params.hid, complete);
-		getSupply(res, db, context, req.params.sid, complete);
+		getItem(res, db, context, req.params.hid, req.params.sid, complete);
 		
 		function complete(){
 			callbackCount++;
-			if (callbackCount >= 3)
+			if (callbackCount >= 2)
 			{
 				res.render('update-Inventory', context);
 				//res.send(JSON.stringify(context));
