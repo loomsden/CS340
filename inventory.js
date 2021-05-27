@@ -113,7 +113,8 @@ module.exports = function(){
 	router.put('/:hid/supply/:sid', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "UPDATE Inventory SET quantity=? WHERE hunterID=? AND supplyID=?";
-		
+	if(req.body.quantity <= 0)
+		req.body.quantity = null;
         var inserts = [req.body.quantity, req.params.hid, req.params.sid];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
