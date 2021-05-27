@@ -58,8 +58,8 @@
             <th scope="row">{{supplyID}}</th>
             <td>{{quantity}}</td>
 			<td>
-				<button type="button" class="btn btn-danger btn-sm">Delete</button>
-				<button type="button" class="btn btn-primary btn-sm">Update</button>
+				<button type="button" class="btn btn-danger btn-sm" onclick="deleteInventory({{hunterID}}, {{supplyID}})">Delete</button>
+				<a href="/inventory/{{hunterID}}/supply/{{supplyID}}" class="btn btn-primary btn-sm">Update</a>
 			</td>
         </tr>
     {{/each}}
