@@ -1,5 +1,5 @@
 function deleteReward(id){
-	$.ajax({
+	jQuery.ajax({
 		url: "/rewards/" + id,
 		type: "DELETE",
 		success: function(result){
