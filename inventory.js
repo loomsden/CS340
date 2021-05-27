@@ -37,9 +37,41 @@ module.exports = function(){
 	}
 	
 	
+	function getHunter(res, db, context, hid, complete){
+		var sql = "SELECT fName FROM Hunters WHERE hunterID = ?;";
+		var inserts = [hid];
+		db.pool.query(sql, inserts, function(error, results, fields){
+			if (error){
+				res.write(JSON.stringify(error));
+				res.end(); 
+			}
+			context.hunter = results[0];
+			complete();
+		});
+	}
+	
+	function getSupply(res, db, context, sid, complete){
+		var sql = "SELECT sName FROM Supplies WHERE supplyID = ?;";
+		var inserts = [sid];
+		db.pool.query(sql, inserts, function(error, results, fields){
+			if (error){
+				res.write(JSON.stringify(error));
+				res.end(); 
+			}
+			context.supply = results[0];
+			complete();
+		});
+	}
+	
+	
+	
+	
+	
+	
 	router.get('/', function(req, res){
 		var callbackCount = 0;
 		var context = {};
+		context.jsscripts = ["deleteinventory.js"];
 		var db = req.app.get('mysql');
 		
 		getInventory(res, db, context, complete);
@@ -59,6 +91,8 @@ module.exports = function(){
     router.post('/', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "INSERT INTO Inventory (hunterID, supplyID, quantity) VALUES (?,?,?)";
+		if(req.body.quantity <= 0)
+			req.body.quantity = null;
         var inserts = [req.body.hunterID, req.body.supplyID, req.body.quantity];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
@@ -67,6 +101,59 @@ module.exports = function(){
                 res.end();
             }else{
                 res.redirect('/inventory');
+            }
+        });
+    });
+	
+	router.get('/:hid/supply/:sid', function(req, res){
+		var callbackCount = 0;
+		var context = {};
+		context.jsscripts = ["updateinventory.js"];
+		var db = req.app.get('mysql');
+		
+		getInventory(res, db, context, complete);
+		getHunter(res, db, context, hid, complete);
+		getSupply(res, db, context, sid, complete);
+		
+		function complete(){
+			callbackCount++;
+			if (callbackCount >= 3)
+			{
+				res.render('update-Inventory', context);
+				//res.send(JSON.stringify(context));
+			}
+		}
+	});
+	
+	router.put('/:hid/supply/:sid', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "UPDATE Inventory SET quantity=? WHERE hunterID=? AND supplyID=?";
+		if(req.body.quantity <= 0)
+			req.body.quantity = null;
+        var inserts = [req.body.quantity, req.params.hid, req.params.sid];
+        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }else{
+                res.status(200);
+				res.end();
+            }
+        });
+    });
+	
+	router.delete('/:hid/supply/:sid', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "DELETE FROM Inventory WHERE hunterID=? AND supplyID=?";
+        var inserts = [req.params.hid, req.params.sid];
+        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+				res.status(400);
+                res.end();
+            }else{
+                res.status(200);
+				res.end();
             }
         });
     });
