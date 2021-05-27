@@ -118,8 +118,8 @@ module.exports = function(){
 			callbackCount++;
 			if (callbackCount >= 1)
 			{
-				//res.render('update-Inventory', context);
-				res.send(JSON.stringify(context));
+				res.render('update-Inventory', context);
+				//res.send(JSON.stringify(context));
 			}
 		}
 	});
