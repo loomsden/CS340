@@ -121,9 +121,8 @@ module.exports = function(){
                 res.write(JSON.stringify(error));
                 res.end();
             }else{
-                //res.status(200);
-				//res.end();
-		    res.send(JSON.stringify(inserts));
+                res.status(200);
+		res.end();
             }
         });
     });
