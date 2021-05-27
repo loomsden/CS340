@@ -54,8 +54,8 @@
     <tbody>
 		{{#each inventory}}
         <tr>
-            <th scope="row">{{hunterID}}</th>
-            <th scope="row">{{supplyID}}</th>
+            <th scope="row">{{hunterID}} - {{fName}}</th>
+            <th scope="row">{{supplyID}} - {{sName}}</th>
             <td>{{quantity}}</td>
 			<td>
 				<button type="button" class="btn btn-danger btn-sm" onclick="deleteInventory({{hunterID}}, {{supplyID}})">Delete</button>
