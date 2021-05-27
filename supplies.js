@@ -17,6 +17,7 @@ module.exports = function(){
 	router.get('/', function(req, res){
 		var callbackCount = 0;
 		var context = {};
+		context.jsscripts = ["deletesupply.js"];
 		var db = req.app.get('mysql');
 		
 		getSupplies(res, db, context, complete);
@@ -48,6 +49,21 @@ module.exports = function(){
                 res.end();
             }else{
                 res.redirect('/supplies');
+            }
+        });
+    });
+	
+	router.delete('/:id', function(req, res){
+        var db = req.app.get('mysql');
+        var sql = "DELETE FROM Supplies WHERE supplyID = ?";
+        var inserts = [req.params.id];
+        sql = db.pool.query(sql, inserts, function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+				res.status(400);
+                res.end();
+            }else{
+                res.status(202).end();
             }
         });
     });
