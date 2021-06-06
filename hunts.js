@@ -63,7 +63,7 @@ module.exports = function(){
 			if (error){
 				//res.write(JSON.stringify(error));
 				alert("Invalid Entry Please Try Again!");
-				res.end(); 
+				//res.end(); 
 			}else{
 				res.redirect('/hunts');
 			}
