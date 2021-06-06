@@ -44,45 +44,47 @@ module.exports = function(){
 	});
 
     router.post('/', function(req, res){
-        var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO Rewards (rName, type, rarity) VALUES (?,?,?)";
-		if(req.body.rName == "")
-			req.body.rName = null;
-		if(req.body.type == "")
-			req.body.type = null;
-		if(req.body.rarity == "")
-			req.body.rarity = null;
-        var inserts = [req.body.rName, req.body.type, req.body.rarity];
-        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
-            if(error){
-                console.log(JSON.stringify(error))
-                res.write(JSON.stringify(error));
-                res.end();
-            }else{
-                res.redirect('/rewards');
-            }
-        });
-    });
-	
-	router.post('/searchReward', function(req, res){
-		var callbackCount = 0;
-		var context = {};
-		context.jsscripts = ["deletereward.js"];
-		var db = req.app.get('mysql');
-		
-		var term = req.body.search;
-        
-		searchRewards(res, db, context, term, complete);
-		
-		function complete(){
-			callbackCount++;
-			if (callbackCount >= 1)
-			{
-				res.render('rewards', context);
-				//res.send(JSON.stringify(context));
+		if(req.Params.AllKeys.Contains("searchsubmit"))
+		{
+			var callbackCount = 0;
+			var context = {};
+			context.jsscripts = ["deletereward.js"];
+			var db = req.app.get('mysql');
+			
+			var term = req.body.search;
+			
+			searchRewards(res, db, context, term, complete);
+			
+			function complete(){
+				callbackCount++;
+				if (callbackCount >= 1)
+				{
+					res.render('rewards', context);
+					//res.send(JSON.stringify(context));
+				}
 			}
+			
+		}else{
+			var mysql = req.app.get('mysql');
+			var sql = "INSERT INTO Rewards (rName, type, rarity) VALUES (?,?,?)";
+			if(req.body.rName == "")
+				req.body.rName = null;
+			if(req.body.type == "")
+				req.body.type = null;
+			if(req.body.rarity == "")
+				req.body.rarity = null;
+			var inserts = [req.body.rName, req.body.type, req.body.rarity];
+			sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+				if(error){
+					console.log(JSON.stringify(error))
+					res.write(JSON.stringify(error));
+					res.end();
+				}else{
+					res.redirect('/rewards');
+				}
+			});
 		}
-	});
+    });
 	
 	router.delete('/:id', function(req, res){
         var db = req.app.get('mysql');
