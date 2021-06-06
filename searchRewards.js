@@ -31,7 +31,6 @@ module.exports = function(){
 			if (callbackCount >= 1)
 			{
 				res.render('rewards', context);
-				req.body.getElementById("search").placeholder = term;
 				//res.send(JSON.stringify(context));
 			}
 		}
