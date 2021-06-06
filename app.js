@@ -34,6 +34,8 @@ app.use('/supplies', require('./supplies.js'));
 
 app.use('/rewards', require('./rewards.js'));
 
+app.use('/searchReward', require('./searchReward.js'));
+
 
 
 
