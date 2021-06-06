@@ -34,31 +34,8 @@ app.use('/supplies', require('./supplies.js'));
 
 app.use('/rewards', require('./rewards.js'));
 
+app.use('/searchReward', require('./searchReward.js'));
 
-app.post('/searchReward', function(req, res){
-  var callbackCount = 0;
-  var context = {};
-  context.jsscripts = ["deletereward.js"];
-  var term = req.body.search;
-
-  db.pool.query("SELECT * FROM Rewards WHERE rName LIKE '%" + term + "%' OR type LIKE '%" + term + "%' OR rarity LIKE '%" + term + "%' ORDER BY rewardID ASC;", function(error, results, fields){
-    if (error){
-      res.write(JSON.stringify(error));
-      res.end(); 
-    }
-    context.rewards = results;
-    complete();
-  });
-
-  function complete(){
-    callbackCount++;
-    if (callbackCount >= 1)
-    {
-      res.render('reward', context);
-      //res.send(JSON.stringify(context));
-    }
-  }
-});
 
 
 
