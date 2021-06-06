@@ -5,6 +5,7 @@ PORT        = 9999;                 // Set a port number at the top so it's easy
 var db = require('./db-connector');
 var bodyParser = require('body-parser');
 var path = require('path');
+var alert = require('alert');
 
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 
