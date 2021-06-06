@@ -23,6 +23,7 @@ module.exports = function(){
 		var db = req.app.get('mysql');
 		
 		var term = req.body.search;
+		context.search = term;
         
 		searchRewards(res, db, context, term, complete);
 		
