@@ -61,12 +61,10 @@ module.exports = function(){
 		var inserts = [req.body.target, req.body.area, req.body.rank, req.body.outcome, req.body.reward];
 		sql = db.pool.query(sql, inserts, function(error, results, fields){
 			if (error){
-				//res.write(JSON.stringify(error));
-				alert("Invalid Entry Please Try Again!");
-				//res.end(); 
+				res.write(JSON.stringify(error));
+				res.end(); 
 			}else{
 				res.redirect('/hunts');
-				alert("Invalid Entry Please Try Again!");
 			}
 		});
 	});
