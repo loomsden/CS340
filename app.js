@@ -6,7 +6,6 @@ var db = require('./db-connector');
 var bodyParser = require('body-parser');
 var path = require('path');
 var alert = require('alert');
-import alert from 'alert'
 
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 
