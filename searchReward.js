@@ -29,7 +29,7 @@ module.exports = function(){
 			callbackCount++;
 			if (callbackCount >= 1)
 			{
-				res.render('reward', context);
+				res.render('rewards', context);
 				//res.send(JSON.stringify(context));
 			}
 		}
