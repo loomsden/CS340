@@ -6,6 +6,7 @@ module.exports = function(){
 		db.pool.query("SELECT * FROM Rewards WHERE rName LIKE '%" + term + "%' OR type LIKE '%" + term + "%' OR rarity LIKE '%" + term + "%' ORDER BY rewardID ASC;", function(error, results, fields){
 			if (error){
 				res.write(JSON.stringify(error));
+				console.log(JSON.stringify(error));
 				res.end(); 
 			}
 			context.rewards = results;
