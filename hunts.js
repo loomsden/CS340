@@ -1,4 +1,3 @@
-import alert from 'alert'
 module.exports = function(){
 	var express = require('express');
 	var router = express.Router();
@@ -48,6 +47,7 @@ module.exports = function(){
 	// Allow INSERT
 	router.post('/', function(req, res){
 		var db = req.app.get('mysql');
+		import alert from 'alert'
 		var sql = "INSERT INTO Hunts (target, area, rank, outcome, rewardID) VALUES (?,?,?,?,?);";
 		if(req.body.target == "")
 			req.body.target = null;
