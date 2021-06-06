@@ -14,7 +14,7 @@ module.exports = function(){
 	}
 
 
-	router.post('/', function(req, res){
+	router.get('/', function(req, res){
 		var callbackCount = 0;
 		var context = {};
 		context.jsscripts = ["deletereward.js"];
